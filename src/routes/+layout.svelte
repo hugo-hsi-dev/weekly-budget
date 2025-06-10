@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import '@fontsource-variable/raleway';
 	import '../app.css';
 	let { children } = $props();
 
@@ -23,4 +24,12 @@
 	});
 </script>
 
-{@render children()}
+<main>
+	{@render children()}
+</main>
+
+<style>
+	:global(body) {
+		font-family: 'Raleway Variable', sans-serif;
+	}
+</style>

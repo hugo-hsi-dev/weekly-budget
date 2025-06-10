@@ -1,6 +1,15 @@
-import { sqliteTable, integer } from 'drizzle-orm/sqlite-core';
+import { integer, numeric, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
-export const user = sqliteTable('user', {
-	id: integer('id').primaryKey(),
-	age: integer('age')
+export const session = pgTable('session', {
+	id: text().primaryKey(),
+	userName: text().notNull(),
+	expiresAt: timestamp().notNull()
+});
+
+export const purchase = pgTable('purchase', {
+	id: integer().primaryKey().generatedAlwaysAsIdentity(),
+	createdAt: timestamp().defaultNow().notNull(),
+	updatedAt: timestamp(),
+	amount: numeric({ precision: 12, scale: 2 }).notNull(),
+	name: text().notNull()
 });

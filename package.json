@@ -20,6 +20,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.2.9",
 		"@eslint/js": "^9.28.0",
+		"@internationalized/date": "^3.8.1",
 		"@lucide/svelte": "^0.513.0",
 		"@sveltejs/adapter-auto": "^6.0.1",
 		"@sveltejs/adapter-node": "^5.2.12",
@@ -28,6 +29,7 @@
 		"@tailwindcss/vite": "^4.1.8",
 		"@types/better-sqlite3": "^7.6.13",
 		"@types/node": "^24.0.0",
+		"bits-ui": "^2.5.0",
 		"clsx": "^2.1.1",
 		"drizzle-kit": "^0.31.1",
 		"eslint": "^9.28.0",
@@ -49,8 +51,13 @@
 		"vite-plugin-devtools-json": "^0.2.0"
 	},
 	"dependencies": {
+		"@fontsource-variable/raleway": "^5.2.6",
+		"@node-rs/argon2": "^2.0.2",
+		"@oslojs/crypto": "^1.0.1",
+		"@oslojs/encoding": "^1.1.0",
 		"better-sqlite3": "^11.10.0",
-		"drizzle-orm": "^0.44.2"
+		"drizzle-orm": "^0.44.2",
+		"pg": "^8.16.0"
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
