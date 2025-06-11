@@ -4,15 +4,35 @@ import * as tables from '$lib/server/db/schema.js';
 import { users } from '$lib/types.js';
 import { invalidate } from '$app/navigation';
 import { asc, eq } from 'drizzle-orm';
+import { getWeekBounds } from '$lib/utils.js';
 
-export async function load({ locals, depends }) {
-	depends('user');
+export async function load({ locals, url }) {
 	if (!locals.user) {
 		return redirect(302, '/authenticate');
 	}
 
+	const searchWeek = url.searchParams.get('week');
+	const search = getWeekBounds(searchWeek ? new Date(searchWeek) : new Date());
+
+	const current = getWeekBounds();
+
+	const earliestPurchase = await db.query.purchase.findFirst({
+		orderBy: (table, { asc }) => [asc(table.createdAt)]
+	});
+
+	const earliest = getWeekBounds(earliestPurchase?.createdAt);
+
+	const activeWeeks: Date[] = [];
+
+	for (let i = new Date(earliest.monday); i <= current.monday; i.setDate(i.getDate() + 7)) {
+		activeWeeks.push(new Date(i));
+	}
+	activeWeeks.reverse();
+
 	const purchases = await db.query.purchase.findMany({
-		orderBy: (table, { desc }) => [desc(table.createdAt)]
+		orderBy: (table, { desc }) => [desc(table.createdAt)],
+		where: (table, { gte, lt, and }) =>
+			and(gte(table.createdAt, search.monday), lt(table.createdAt, search.sunday))
 	});
 
 	const totalBudget = await db.query.budget.findFirst();
@@ -27,6 +47,7 @@ export async function load({ locals, depends }) {
 		.toString();
 
 	return {
+		activeWeeks,
 		purchases,
 		user: locals.user,
 		totalBudget: totalBudget?.amount ?? '120.00',
@@ -42,7 +63,6 @@ export const actions = {
 
 		const formData = await request.formData();
 		const user = formData.get('user');
-		console.log(user);
 		if (!user || !users.includes(user as any)) {
 			return fail(400, { message: 'Invalid user' });
 		}
@@ -65,7 +85,6 @@ export const actions = {
 		const amount = (formData.get('amount') as string).slice(1) || null;
 
 		if (!name || name.length < 3) {
-			console.log('Name is too short');
 			return fail(400, { message: 'Name has to be at least 3 characters' });
 		}
 

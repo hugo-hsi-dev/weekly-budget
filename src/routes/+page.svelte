@@ -5,6 +5,7 @@
 	import Purchases from '$lib/components/purchases.svelte';
 	import AddPurchase from '$lib/components/add-purchase.svelte';
 	import CurrentBudget from '$lib/components/current-budget.svelte';
+	import ActiveWeeks from '$lib/components/active-weeks.svelte';
 
 	let { data, form }: PageProps = $props();
 </script>
@@ -15,6 +16,7 @@
 		<UserSelect userName={data.user.userName} />
 	</header>
 	<div class="px-6 pt-22">
+		<ActiveWeeks weeks={data.activeWeeks} />
 		<div class="mb-6">
 			<CurrentBudget totalBudget={data.totalBudget} remainingBudget={data.remainingBudget} {form} />
 		</div>

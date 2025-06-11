@@ -21,9 +21,7 @@
 </script>
 
 <Drawer.Root bind:open shouldScaleBackground>
-	<Drawer.Trigger
-		class={['fixed right-6 bottom-6', buttonVariants({ variant: 'outline', size: 'icon' })]}
-	>
+	<Drawer.Trigger class={['fixed right-6 bottom-6', buttonVariants({ size: 'icon' })]}>
 		<Plus />
 	</Drawer.Trigger>
 	<Drawer.Content class="pb-6">
