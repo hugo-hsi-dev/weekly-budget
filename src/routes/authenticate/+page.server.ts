@@ -20,9 +20,10 @@ export const actions = {
 			fail(400, { message: 'Invalid pin' });
 		}
 
-		console.log(HASHED_PIN);
+		const hash = Buffer.from(HASHED_PIN, 'base64').toString('utf-8');
+		console.log(hash);
 
-		const validPin = await verifyPinHash(HASHED_PIN, pin as string);
+		const validPin = await verifyPinHash(hash, pin as string);
 
 		if (!validPin) {
 			return fail(400, {
