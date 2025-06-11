@@ -108,6 +108,7 @@ export const actions = {
 		const name = (formData.get('name') as string) || undefined;
 		const amount = (formData.get('amount') as string).slice(1) || null;
 		const user = (formData.get('user') as string) || null;
+		const createdAt = (formData.get('created-at') as string) || null;
 
 		if (!id) {
 			return fail(400, { message: 'Something went wrong, please contact admin' });
@@ -121,9 +122,19 @@ export const actions = {
 			return fail(400, { message: 'Invalid user' });
 		}
 
+		if (!createdAt || isNaN(Date.parse(createdAt))) {
+			return fail(400, { message: 'Invalid date' });
+		}
+
 		await db
 			.update(tables.purchase)
-			.set({ name, amount: amount.replaceAll(',', ''), updatedAt: new Date(), user })
+			.set({
+				name,
+				amount: amount.replaceAll(',', ''),
+				updatedAt: new Date(),
+				user,
+				createdAt: new Date(createdAt)
+			})
 			.where(eq(tables.purchase.id, Number(id)));
 
 		return { success: true };
