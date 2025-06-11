@@ -19,7 +19,7 @@
 
 <Sheet.Root bind:open>
 	<Sheet.Trigger
-		class={buttonVariants({ variant: 'outline', size: 'icon', class: 'absolute bottom-6 left-6' })}
+		class={buttonVariants({ variant: 'outline', size: 'icon', class: 'fixed bottom-6 left-6' })}
 	>
 		<CalendarClock />
 	</Sheet.Trigger>
