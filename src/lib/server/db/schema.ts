@@ -11,5 +11,15 @@ export const purchase = pgTable('purchase', {
 	createdAt: timestamp().defaultNow().notNull(),
 	updatedAt: timestamp(),
 	amount: numeric({ precision: 12, scale: 2 }).notNull(),
-	name: text().notNull()
+	name: text().notNull(),
+	user: text().notNull()
 });
+
+export const budget = pgTable('budget', {
+	id: integer().primaryKey().generatedAlwaysAsIdentity(),
+	createdAt: timestamp().defaultNow().notNull(),
+	updatedAt: timestamp(),
+	amount: numeric({ precision: 12, scale: 2 }).notNull().default('120.00')
+});
+
+export type Purchase = typeof purchase.$inferSelect;
