@@ -22,7 +22,7 @@
 	<Drawer.Trigger class={badgeVariants({ variant: 'outline' })}
 		><Pencil />${totalBudget}</Drawer.Trigger
 	>
-	<Drawer.Content>
+	<Drawer.Content class="pb-6">
 		<Drawer.Header>
 			<Drawer.Title>Edit the total budget</Drawer.Title>
 		</Drawer.Header>

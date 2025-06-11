@@ -27,7 +27,7 @@
 	<Drawer.Trigger class={[buttonVariants({ variant: 'ghost', size: 'icon' })]}>
 		<Pencil />
 	</Drawer.Trigger>
-	<Drawer.Content class="gap-0">
+	<Drawer.Content class="pb-6">
 		<Drawer.Header>
 			<Drawer.Title>Edit <span class="text-primary">{purchase.name}</span></Drawer.Title>
 		</Drawer.Header>

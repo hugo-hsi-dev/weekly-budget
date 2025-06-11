@@ -26,7 +26,7 @@
 	>
 		<Plus />
 	</Drawer.Trigger>
-	<Drawer.Content class="gap-0">
+	<Drawer.Content class="pb-6">
 		<Drawer.Header>
 			<Drawer.Title>Add a new purchase</Drawer.Title>
 		</Drawer.Header>

@@ -26,7 +26,7 @@
 	<Drawer.Trigger class={[buttonVariants({ variant: 'ghost', size: 'icon' })]}>
 		<Trash class="text-destructive" />
 	</Drawer.Trigger>
-	<Drawer.Content class="gap-0">
+	<Drawer.Content class="pb-6">
 		<Drawer.Header>
 			<Drawer.Title
 				>Are you sure you want to <span class="text-destructive">Delete</span>
